@@ -14,7 +14,7 @@ limitations under the License.
 //load model
 //mdl: model handle; bin: model bin buf; buf: main buf for middle output; cb: layer callback; 
 //in: return input mat, include buf addr; //you can ignore it if use static buf
-tm_err_t TM_WEAK tm_load  (tm_mdl_t* mdl, const uint8_t* bin, uint8_t*buf, tm_cb_t cb, tm_mat_t* in)
+tm_err_t TM_WEAK tm_load(tm_mdl_t* mdl, const uint8_t* bin, uint8_t*buf, tm_cb_t cb, tm_mat_t* in)
 {
     tm_mdlbin_t* mdl_bin = (tm_mdlbin_t*)bin;
     if(mdl_bin->magic != TM_MDL_MAGIC)   return TM_ERR_MAGIC;   //FIXME: big-endian not compatible

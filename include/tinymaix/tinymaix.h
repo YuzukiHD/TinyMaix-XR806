@@ -130,7 +130,6 @@ typedef enum{
     TM_ACT_MAXCNT ,
 }tm_act_type_t;
 
-
 typedef enum {
     TMPP_NONE      = 0,
     TMPP_FP2INT    = 1,  //user own fp buf -> int input buf
@@ -143,7 +142,8 @@ typedef enum {
 
 /******************************* STRUCT ************************************/
 //mdlbin in flash
-typedef struct{
+
+typedef struct __attribute__((packed)){
     uint32_t magic;         //"MAIX"
     uint8_t  mdl_type;      //0 int8, 1 int16, 2 fp32,
     uint8_t  out_deq;       //0 don't dequant out; 1 dequant out
@@ -159,7 +159,7 @@ typedef struct{
 }tm_mdlbin_t;
 
 //mdl meta data in ram
-typedef struct{
+typedef struct __attribute__((packed)){
     tm_mdlbin_t* b;         //bin
     void*    cb;            //Layer callback
     uint8_t* buf;           //main buf addr
@@ -172,7 +172,7 @@ typedef struct{
 //dims==3, hwc
 //dims==2, 1wc
 //dims==1, 11c
-typedef struct{
+typedef struct __attribute__((packed)){
     uint16_t dims;
     uint16_t h;
     uint16_t w;
@@ -184,7 +184,7 @@ typedef struct{
 }tm_mat_t;
 
 /******************************* LAYER STRUCT ************************************/
-typedef struct{             //48byte
+typedef struct __attribute__((packed)){             //48byte
     uint16_t type;          //layer type
     uint16_t is_out;        //is output
     uint32_t size;          //8 byte align size for this layer
@@ -200,7 +200,7 @@ typedef struct{             //48byte
     //note: real = scale*(q-zeropoint)
 }tml_head_t;
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 
     uint8_t  kernel_w;
@@ -225,11 +225,11 @@ typedef struct{
     //      fused in advance (when convert model)
 }tml_conv2d_dw_t;  //compatible with conv2d and dwconv2d
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 }tml_gap_t;
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 
     uint32_t ws_oft;        //weight scale oft from this layer start 
@@ -238,15 +238,15 @@ typedef struct{
     uint32_t reserve;       //for 8byte align
 }tml_fc_t;
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 }tml_softmax_t;
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 }tml_reshape_t;
 
-typedef struct{
+typedef struct __attribute__((packed)){
     tml_head_t h;
 
     uint8_t  kernel_w;
@@ -323,7 +323,7 @@ float TM_WEAK tm_fp8to32(uint8_t fp8);
 /******************************* LOCAL MATH FUNCTION  ************************************/
 #if TM_LOCAL_MATH
 //http://www.machinedlearnings.com/2011/06/fast-approximate-logarithm-exponential.html
-    inline float _exp(float x) {
+static inline float _exp(float x) {
         float p = 1.442695040f * x;
         uint32_t i = 0;
         uint32_t sign = (i >> 31);

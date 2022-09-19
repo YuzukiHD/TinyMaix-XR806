@@ -178,4 +178,11 @@ config BOOTLOADER
 	help
 		set y to disable some features when build bootloader.
 
+# Sipeed TinyMaix 
+config TINYMAIX
+	bool "library tinymaix"
+	default n
+	help
+		set y to build library tinymaix.
+
 endmenu

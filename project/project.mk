@@ -167,6 +167,10 @@ ifeq ($(CONFIG_TRUSTZONE), y)
 	LIBRARIES += $(ROOT_PATH)/lib/$(NSC_SYMBOL)
 endif
 
+ifeq ($(CONFIG_TINYMAIX), y)
+  LIBRARIES += -ltinymaix
+endif
+
 LIBRARIES += -lxrc $(LD_SYS_LIBS) -lxrc
 
 # ----------------------------------------------------------------------------

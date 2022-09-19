@@ -52,3 +52,5 @@ tools/config/conf
 !/lib/libwpas_wps_hostapd.a
 !/lib/libzbar.a
 !/lib/libwatchpoint.a
+
+gcc.mk

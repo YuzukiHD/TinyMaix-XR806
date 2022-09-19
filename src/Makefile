@@ -87,6 +87,10 @@ endif
 SUBDIRS += sdd
 endif
 
+ifeq ($(CONFIG_TINYMAIX), y)
+SUBDIRS += tinymaix
+endif
+
 ifeq ($(CONFIG_CPLUSPLUS), y)
 SUBDIRS += cplusplus
 endif

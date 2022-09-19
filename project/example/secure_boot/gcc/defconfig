@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/secure_boot"
+CONFIG_SECURE_BOOT=y
+

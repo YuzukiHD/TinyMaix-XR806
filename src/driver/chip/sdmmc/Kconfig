@@ -1,0 +1,72 @@
+menu "SDMMC Devices"
+
+config DRIVERS_SDMMC
+    bool "enable SDMMC drivers"
+	depends on CHIP_TYPE_XR872 || CHIP_TYPE_XR808
+    default y
+
+if DRIVERS_SDMMC
+
+config USE_SD
+	bool "enable SD"
+	default y
+
+# not support now!
+#config SD_SUPPORT_VERSION3
+#	bool "support SD VERSION3"
+#	default n
+
+config USE_SDIO
+	bool "enable SDIO"
+	default y
+
+# not support now!
+#config USE_SDIO_COMBO
+#	bool "enable SDIO COMBO"
+#	depends on USE_SDIO
+#	default n
+
+# not support now!
+#config USE_SDIO_FUNS
+#	bool "enable SDIO FUNS"
+#	depends on USE_SDIO
+#	default n
+
+config USE_MMC
+	bool "enable mmc"
+	default n
+
+# not support now
+config USE_MMC_QUIRK
+	bool "enable mmc quirk"
+	depends on USE_MMC
+	default n
+
+config DETECT_CARD
+    bool "enable detect card"
+    default y
+
+config SDIO_IRQ_SUPPORT
+	bool "enable sdio irq"
+	default y
+
+config SDC_DMA_USED
+	bool "enable dma transmission"
+	default y
+
+config SDC_DMA_BUF_SIZE
+	int "SD Card Align DMA Buffer Size(Kbyte)."
+	depends on SDC_DMA_USED
+	default 64
+
+config SD_TEST
+	select USE_SD
+	bool "enable SD Card test case."
+	default y
+
+config SDIO_DEBUG
+	bool "enable sdio debug"
+	default n
+
+endif
+endmenu

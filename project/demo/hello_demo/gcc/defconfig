@@ -1,0 +1,4 @@
+CONFIG_PROJECT="demo/hello_demo"
+CONFIG_XIP=y
+CONFIG_OTA=y
+CONFIG_WLAN=y

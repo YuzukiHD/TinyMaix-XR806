@@ -1,0 +1,83 @@
+#
+# Feature configuration
+#
+
+menu "Feature options"
+
+# redefine int32_t to signed int, but not signed long
+config LIBC_REDEFINE_GCC_INT32_TYPE
+	bool
+	default y
+	help
+		redefine int32_t to signed int, but not signed long.
+
+# support printf float variables
+config LIBC_PRINTF_FLOAT
+	bool
+	default y
+	help
+		support printf float variables.
+
+# support scanf float variables
+config LIBC_SCANF_FLOAT
+	bool
+	default y
+	help
+		support scanf float variables.
+
+
+# wrap standard input/output/error functions
+config LIBC_WRAP_STDIO
+	bool "Wrap standard input/output/error functions"
+	default y
+	help
+		wrap standard input/output/error functions.
+
+
+# heap managed by stdlib
+config MALLOC_MODE
+	int "Heap managed mode."
+	default 0
+	help
+		heap managed mode. 0 for stdlib, 1 for sys_heap
+
+# mix sram/psram heap manager
+config MIX_HEAP_MANAGE
+	bool "Enable mix heap manager"
+	depends on PSRAM
+	default n
+	help
+		mix sram/psram heap manager
+
+# enable section attribute macros "__xip_xxx", eg. __xip_text
+config SECTION_ATTRIBUTE_XIP
+	bool "Enable section attribute macros __xip_xxx"
+	depends on XIP
+	default y
+	help
+		enable section attribute macros "__xip_xxx", eg. __xip_text.
+
+# enable section attribute macros "__nonxip_xxx", eg. __nonxip_text
+config SECTION_ATTRIBUTE_NONXIP
+	bool "Enable section attribute macros __nonxip_xxx"
+	depends on XIP
+	default y
+	help
+		enable section attribute macros "__nonxip_xxx", eg. __nonxip_text.
+
+# enable section attribute macros "__sram_xxx", eg. __sram_text
+config SECTION_ATTRIBUTE_SRAM
+	bool "Enable section attribute macros __sram_xxx"
+	default y
+	help
+		enable section attribute macros "__sram_xxx", eg. __sram_text.
+
+# enable section attribute macros "__psram_xxx", eg. __psram_text
+config SECTION_ATTRIBUTE_PSRAM
+	bool "Enable section attribute macros __psram_xxx"
+	depends on PSRAM
+	default y
+	help
+		enable section attribute macros "__psram_xxx", eg. __psram_text.
+
+endmenu

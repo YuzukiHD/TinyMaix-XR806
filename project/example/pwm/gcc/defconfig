@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/pwm"
+
+# CONFIG_XIP is not set

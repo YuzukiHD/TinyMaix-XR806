@@ -1,0 +1,2 @@
+CONFIG_PROJECT="example/i2c"
+# CONFIG_XIP is not set

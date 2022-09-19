@@ -1,0 +1,4 @@
+CONFIG_PROJECT="example/voice_print"
+CONFIG_XIP=y
+CONFIG_WLAN=y
+

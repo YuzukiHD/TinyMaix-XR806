@@ -1,0 +1,39 @@
+#
+# Devices configuration
+#
+
+menu "Devices options"
+
+
+# Disable IRQ during flash erasing/writing
+config FLASH_ERASE_WRITE_DISABLE_IRQ
+	bool "Disable IRQ during flash erasing/writing"
+	default n
+	help
+		When this option is selected, interrupt codes are allowed to be placed in XIP or PSRAM.
+		However, interrupt response may be delayed or missed during flash erasing or writing.
+
+# flash block lock support
+config FLASH_POWER_DOWN_PROTECT
+	bool "flash data protect when power down(during erase/write)"
+	default n
+	help
+		 Use flash block lock mode during erasing/writing to protect flash data in case of accidental power down.
+
+# flash pm config
+config FLASH_PM_ALLOW_ENTER_PWR_DOWN
+	bool "flash enter power-down mode in pm(standby/hibernation)"
+	depends on PM
+	default y
+	help
+		 Allow Flash to enter power-down mode in standby or hibernation state.
+
+source "src/driver/chip/psram/Kconfig"
+
+source "src/driver/chip/sdmmc/Kconfig"
+
+config IR_USED_CLK_32K
+	bool "ir use 32K"
+		default n
+
+endmenu

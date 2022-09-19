@@ -1,0 +1,4 @@
+CONFIG_PROJECT="example/pm"
+CONFIG_WLAN=y
+# CONFIG_BLE_FEATURE is not set
+CONFIG_PM=y

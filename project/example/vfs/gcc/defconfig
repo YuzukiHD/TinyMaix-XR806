@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/vfs"
+CONFIG_FILESYSTEMS=y
+# CONFIG_XIP is not set

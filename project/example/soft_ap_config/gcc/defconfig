@@ -1,0 +1,5 @@
+CONFIG_PROJECT="example/soft_ap_config"
+CONFIG_XIP=y
+CONFIG_WLAN=y
+CONFIG_WLAN_STA=y
+CONFIG_WLAN_AP=y

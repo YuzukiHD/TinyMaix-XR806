@@ -1,0 +1,5 @@
+#
+# driver configuration
+#
+
+source "src/driver/chip/Kconfig"

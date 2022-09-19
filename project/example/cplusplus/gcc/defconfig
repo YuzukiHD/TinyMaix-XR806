@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/cplusplus"
+
+CONFIG_CPLUSPLUS=y

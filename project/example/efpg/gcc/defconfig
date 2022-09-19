@@ -1,0 +1,2 @@
+CONFIG_PROJECT="example/efpg"
+CONFIG_XIP=y

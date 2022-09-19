@@ -1,0 +1,5 @@
+CONFIG_PROJECT="demo/at_demo"
+CONFIG_XIP=y
+CONFIG_OTA=y
+CONFIG_WLAN=y
+# CONFIG_BLE_FEATURE is not set

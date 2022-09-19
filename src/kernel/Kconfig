@@ -1,0 +1,44 @@
+#
+# Kernel configuration
+#
+
+menu "Kernel options"
+
+
+# os
+config OS_FREERTOS
+	bool "FreeRTOS used"
+	default y
+	help
+		FreeRTOS used.
+
+# os version
+choice
+	prompt "FreeRTOS version"
+	default FREERTOS_VER_10_2_1
+	help
+		Select FreeRTOS version.
+
+config FREERTOS_VER_10_2_1
+	bool "FreeRTOS v10.2.1"
+	help
+		FreeRTOS v10.2.1.
+endchoice
+
+config OS_FREERTOS_VERSION_STR
+	string
+	default "v10.2.1" if FREERTOS_VER_10_2_1
+	help
+	  FreeRTOS version Selsected
+
+
+# Use os idle hook
+config OS_USE_IDLE_HOOK
+	bool "FreeRTOS idle hook"
+	default n
+	depends on ROM_FREERTOS
+	help
+	  Use freeRTOS idle hook
+
+
+endmenu

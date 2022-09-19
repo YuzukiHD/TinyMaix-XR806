@@ -1,0 +1,111 @@
+#
+# For a description of the syntax of this configuration file,
+# see config/kconfig-language.txt.
+#
+mainmenu "XR806 SDK Configuration"
+
+
+# Projects select
+config PROJECT
+	string "Projects Selected"
+	default ""
+	help
+		[test/driver_test demo/wlan_demo examples/uart ...] Projects Selsected
+
+
+source "project/Kconfig"
+
+# power configuration
+choice SENSE_POWER_SUPPLY
+    prompt "VDD_SENSE power supply mode"
+    default PWR_INTERNAL_LDO
+    help
+        VDD_SENSE power supply mode:
+
+        - internal LDO
+        - internal DCDC
+        - external Power
+
+config PWR_INTERNAL_LDO
+    bool "Use internal LDO"
+config PWR_INTERNAL_DCDC
+    bool "Use internal DCDC"
+config PWR_EXTERNAL
+    bool "external power"
+endchoice
+
+# net and wlan
+menuconfig WLAN
+    bool "NET and WLAN"
+    default n
+    help
+        If this option is enabled, NET and WLAN used.
+
+if WLAN
+source "src/net/Kconfig"
+source "src/wlan/Kconfig"
+endif
+
+menuconfig BLE_FEATURE
+	bool "BLE"
+	default n
+	help
+	  This option enables Bluetooth support.
+
+if BLE_FEATURE
+
+config BLE
+    bool "BLE Controller"
+    default y
+    help
+        If this option is enabled, BLE Controller used.
+
+source "src/ble/Kconfig"
+
+endif
+
+
+menuconfig FILESYSTEMS
+	bool "filesystem support"
+	default n
+	help
+	  If this option is enabled, filesystem used.
+
+if FILESYSTEMS
+source "src/fs/Kconfig"
+endif
+
+source "src/kernel/Kconfig"
+
+source "src/driver/Kconfig"
+
+
+# power management
+menuconfig PM
+    bool "Power management"
+	depends on !BOOTLOADER && !ETF
+    default y
+    help
+        power management.
+
+if PM
+source "src/pm/Kconfig"
+endif
+
+
+source "src/trustzone/Kconfig"
+
+
+# Feature configuration
+source "src/libc/Kconfig"
+
+
+# Debug configuration
+source "src/debug/Kconfig"
+
+# C++ configuration
+config CPLUSPLUS
+    bool "C++ support"
+    default n
+    help
+        This option enables C++ support.

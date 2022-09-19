@@ -1,0 +1,77 @@
+#
+# File systems
+#
+
+# fatfs
+config FAT_FS
+	bool "FAT filesystem support"
+	depends on SDMMC
+	default y
+	---help---
+		FAT filesystem support.
+
+# flash fs image pack
+config FLASH_FS_IMG_PACK
+	bool "flash filesystem image pack support"
+	default n
+	help
+		If this option is enabled, flash filesystem bin will be pack to image.
+
+# flash file systems
+choice
+	prompt "FileSystem Type Select"
+	default LITTLE_FS
+	help
+		Select FS type.
+
+# littlefs
+config LITTLE_FS
+	bool "LittleFS"
+	---help---
+		little filesystem support.
+# spiffs
+config SPIF_FS
+	bool "SPIFFS"
+	---help---
+		spiffs filesystem support.
+endchoice
+
+if LITTLE_FS
+config LITTLE_FS_START_ADDR
+	int "little filesystem start address"
+	default 1572864
+	---help---
+		little filesystem start address.
+
+config LITTLE_FS_BLOCK_SIZE
+	int "little filesystem block size"
+	default 4096
+	---help---
+		little filesystem block size.
+
+config LITTLE_FS_BLOCK_COUNT
+	int "little filesystem block count"
+	default 128
+	---help---
+		little filesystem block count.
+endif
+
+if SPIF_FS
+config SPIF_FS_START_ADDR
+	int "spiffs filesystem start address"
+	default 1572864
+	---help---
+		spiffs filesystem start address.
+
+config SPIF_FS_BLOCK_SIZE
+	int "spiffs filesystem block size"
+	default 4096
+	---help---
+		spiffs filesystem block size.
+
+config SPIF_FS_PHY_SIZE
+	int "spiffs filesystem physical size"
+	default 131072
+	---help---
+		spiffs filesystem block count.
+endif

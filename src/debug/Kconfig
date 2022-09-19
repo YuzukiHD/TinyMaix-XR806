@@ -1,0 +1,143 @@
+#
+# Debug configuration
+#
+
+menu "Debug options"
+
+
+# statistical cpuusage
+config OS_DEBUG_CPU_USAGE
+	bool "Debug CPU usage"
+	depends on OS_FREERTOS
+	default n
+	help
+	  CPU usage is supported if selected, only used in debug mode for this will cost more power.
+
+# seconds of cpu usage info print
+config OS_DEBUG_CPU_USAGE_SECONDS
+	int "seconds of cpu usage info print"
+	depends on OS_DEBUG_CPU_USAGE
+	default 1
+	help
+		0: not print cpuusage info, get cpuusage info by interface; other: seconds of cpu usage print.
+
+# trace heap memory usage and error when using malloc, free, etc.
+config MALLOC_TRACE
+	bool "Trace heap memory usage and error"
+	default n
+	help
+		trace heap memory usage and error when using malloc, free.
+
+# backtrace for debug.
+config BACKTRACE
+	bool "backtrace"
+	default n
+	help
+		backtrace for debug.
+
+# watchpoint for debug.
+config WATCHPOINT
+	bool "watchpoint"
+	default n
+	help
+		watchpoint for debug.
+
+# heap debug.
+config HEAP_FREE_CHECK
+	bool "Check heap free parameter"
+	default n
+	help
+		heap debug.
+
+# trace psram heap memory usage and error when using malloc, free, etc.
+config PSRAM_MALLOC_TRACE
+	bool "Trace psram heap memory usage and error"
+	default n
+	help
+		trace psram heap memory usage and error when using malloc, free.
+
+# rom of FreeRTOS
+config ROM_FREERTOS
+	bool
+	depends on ROM && !OS_DEBUG_CPU_USAGE && FREERTOS_VER_10_2_1
+	default y
+	help
+	  FreeRTOS rom code used
+
+
+# reduce debug message
+config REDUCE_DBG_MSG
+	bool "Reduce debug message"
+	default n
+	help
+		reduce debug message.
+
+
+# reduce RAM usage
+config REDUCE_RAM
+	bool "Reduce RAM usage"
+	default n
+	help
+		reduce RAM usage.
+
+config WLAN_SHARE_RAM
+	bool "wlan share app sram"
+	default n
+	depends on WLAN
+	help
+		wlan share app sram for wlan debug.
+
+# Wlan share app sram size select
+choice
+	prompt "wlan share app sram size"
+	depends on WLAN_SHARE_RAM
+	default WLAN_SHARE_RAM_SIZE_96K
+	help
+		Select wlan share app sram size.
+
+config WLAN_SHARE_RAM_SIZE_16K
+	bool "16k"
+	help
+		Share app sram size 16K
+config WLAN_SHARE_RAM_SIZE_32K
+	bool "32k"
+	help
+		Share app sram size 32K
+config WLAN_SHARE_RAM_SIZE_64K
+	bool "64k"
+	help
+		Share app sram size 64K
+config WLAN_SHARE_RAM_SIZE_96K
+	bool "96k"
+	help
+		Share app sram size 96K
+config WLAN_SHARE_RAM_SIZE_128K
+	bool "128k"
+	help
+		Share app sram size 128K
+endchoice
+
+
+# use external flash only
+config EXT_FLASH_ONLY
+	bool "use external flash only"
+	default n
+	help
+		force to use external flash whether sip flash exist or not.
+
+
+# rom
+config ROM
+	bool
+	default y
+	help
+		Used ROM code.
+
+# rom of xz
+config ROM_XZ
+	bool
+	default y
+	help
+		Used XZ ROM code.
+
+endmenu

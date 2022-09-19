@@ -1,0 +1,197 @@
+#
+# Security configuration
+#
+
+menu "Security options"
+
+
+# secure boot
+menuconfig SECURE_BOOT
+	bool "Secure Boot support"
+	default n
+	help
+		If this option is enabled, secure boot used.
+		The default verification process is Brom to verify the pub key and the sign of Bootloader,
+		and Bootloader to verify the sign of app_bin.
+
+if SECURE_BOOT && BOOTLOADER
+
+# app_xip verify option in compiling bootloader projects
+config APP_XIP_BIN_VERIFY
+	bool "verify app_xip bin"
+	default y
+	---help---
+		Turn on this function in Bootloader to increase
+		the demand for the verification of app_xip_bin.
+
+# app_psram verify option in compiling bootloader projects
+config APP_PSRAM_BIN_VERIFY
+	bool "verify app_psram bin"
+	default y
+	---help---
+		Turn on this function in Bootloader to increase
+		the demand for the verification of app_psram_bin.
+
+endif
+
+if SECURE_BOOT && !BOOTLOADER
+
+# app_xip sign option in compiling non bootloader projects
+config APP_XIP_BIN_SIGN
+	bool "sign app_xip bin"
+	depends on XIP
+	default y
+	---help---
+		open the function to sign the app_xip_bin in compiling user's projects.
+
+# app_psram sign option in compiling non bootloader projects
+config APP_PSRAM_BIN_SIGN
+	bool "sign app_psram bin"
+	depends on PSRAM
+	default y
+	---help---
+		open the function to sign the app_psram_bin in compiling user's projects.
+
+endif
+
+#flash crypto
+menuconfig FLASH_CRYPTO
+	bool "Flash Crypto support"
+	default n
+	help
+		If this option is enabled, flash crypto used.
+		In order to ensure the security of the secret key as much as possible,
+		It is recommended to turn off the JTAG function in the final mirror code,
+		and delete the commands such as mem read and eFuse.
+
+if FLASH_CRYPTO && BOOTLOADER
+#load encrypted app(sram) bin support
+config SRAM_BIN_ENCRYPT
+	bool "load encrypted app(sram) bin support"
+	default y
+	---help---
+		If this option is enabled, bootloader will support to decrypt and load an encrypted app bin file.
+		As the body of the image bin is loaded to SRAM, this bin will be judged,
+		if it is an encrypted bin file, it will be automatically decrypted and loaded.
+endif
+
+if FLASH_CRYPTO && !BOOTLOADER
+
+#app(sram) bin encrypt option
+config SRAM_BIN_ENCRYPT
+	bool "encrypt app(sram) bin"
+	default y
+	---help---
+		If this option is enabled, app_bin will be encrypted.
+		As the body of the image bin is loaded to SRAM, this bin will be judged,
+		if it is an encrypted bin file, it will be automatically decrypted and loaded.
+
+#app_xip encrypt option
+config APP_XIP_ENCRYPT
+	bool "encrypt app_xip bin"
+	depends on XIP
+	default y
+	---help---
+		Turn on this function in to increase the demand for the encryption of app_xip_bin.
+		For XIP function, CBUS fetch instruction and data from flash, will be decrypt.
+
+#app_psram encrypt option
+config APP_PSRAM_ENCRYPT
+	bool "encrypt app_psram bin"
+	depends on PSRAM
+	default y
+	---help---
+		Turn on this function in to increase the demand for the encryption of app_psram_bin.
+		For PSRAM function, CBUS fetch instruction and data from psram, will be decrypt.
+		When reading and writing in the psram heap, its data will not be encrypted.
+
+endif
+
+if !BOOTLOADER
+config TRUSTZONE
+	bool "Trustzone support"
+	select SECURE_BOOT
+	default n
+	---help---
+		If this option is enabled, TRUSTZONE used.
+endif
+
+if BOOTLOADER
+# trustzone boot
+config TRUSTZONE_BOOT
+	bool "Bootloader supoort trustzone app"
+	select SECURE_BOOT
+	default n
+	help
+		if build secure bootloader(support trustzone app) project select this.
+endif
+
+if TRUSTZONE || BOOTLOADER
+
+# TZ ROM
+config TZ_ROM
+	bool "Used TZ_ROM code"
+	default y
+	help
+		Used TZ_ROM code.
+
+
+config TZ_RAM_SIZE
+	int "Secure sram size"
+	default 27
+	depends on TRUSTZONE
+	help
+		based on KB.
+
+
+config TZ_XIP_SIZE
+	int "Secure xip size"
+	depends on XIP
+	default 32
+	help
+		based on KB.
+
+# config trustzone psram
+config TZ_PSRAM
+	bool "Trustzone psram"
+	default n
+	help
+		If this option is enabled, trustzone psram can be used.
+
+config TZ_PSRAM_SIZE
+	int "Secure psram size"
+	depends on TZ_PSRAM
+	default 32
+	help
+		based on KB.
+endif
+
+# This option is only configured if TRUSTZONE is set
+if TRUSTZONE
+
+# config trustzone xip
+config TZ_XIP
+	bool "Trustzone xip"
+	depends on XIP
+	default y
+	help
+		config trustzone xip.
+
+# trustzone code encrypt option
+config TZ_CODE_ENCRYPT
+	bool "trustzone code encrypt option"
+	depends on FLASH_CRYPTO
+	default n
+	help
+		trustzone code encrypt option.
+
+# config trustzone efuse
+config TZ_EFUSE
+	bool "Efuse can only operated in trustzone"
+	default n
+	help
+		If this option is enabled, all efuse bits is secure, read efuse bits by TZ NSC function.
+
+endif
+
+endmenu

@@ -1,0 +1,38 @@
+#
+# Networking configuration
+#
+
+menu "Networking options"
+
+
+# mbed TLS
+config MBEDTLS_VER
+	string "mbed TLS version"
+	default "2.16.0"
+	help
+		2.2.0: mbed TLS 2.2.0, 2.16.0: mbed TLS 2.16.0.
+
+
+# lwIP version
+choice
+	prompt "lwIP version"
+	depends on WLAN
+	default LWIP_VER_2_1_2
+	help
+		Select lwIP version.
+
+config LWIP_VER_1_4_1
+	bool "lwIP 1.4.1"
+	help
+		lwIP 1.4.1, support IPv4 stack only.
+config LWIP_VER_2_0_3
+	bool "lwIP 2.0.3"
+	help
+		lwIP 2.0.3, support dual IPv4/IPv6 stack.
+config LWIP_VER_2_1_2
+	bool "lwIP 2.1.2"
+	help
+		lwIP 2.1.2, support dual IPv4/IPv6 stack.
+endchoice
+
+endmenu

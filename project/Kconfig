@@ -1,0 +1,181 @@
+#
+# Project configuration.
+#
+
+menu "Project settings"
+
+# Platform
+#config PLATFORM_FPGA
+#	bool "Platform FPGA select"
+#	default n
+#	help
+#		[FPGA] platform select
+
+# Chip select
+choice CHIP_TYPE
+    prompt "Chip select"
+    default CHIP_XR806
+    help
+        XRADIO SDK Currently supports the following chips:
+
+        - xr806
+
+config CHIP_XR806
+    bool "xr806"
+endchoice
+
+choice XTAL_FREQ_SEL
+    prompt "XTAL frequency"
+    default HOSC_TYPE_40M
+    help
+        XR806 Currently supports the following XTAL frequencies:
+
+        - 24 MHz
+        - 26 MHz
+        - 32 MHz
+        - 40 MHz
+
+config HOSC_TYPE_24M
+    bool "24 MHz"
+config HOSC_TYPE_26M
+    bool "26 MHz"
+config HOSC_TYPE_32M
+    bool "32 MHz"
+config HOSC_TYPE_40M
+    bool "40 MHz"
+endchoice
+
+
+# Projects board select
+config BOARD
+	string "Projects board selected"
+	default "xr806_dig_ver"
+	help
+	  [xradio_bl/xradio_evb/xradio_ai/...] Boards Selsected
+
+
+# XIP
+config XIP
+    bool "XIP"
+    default y
+    help
+        If this option is enabled, XIP code can be used.
+
+config PSRAM
+    bool "PSRAM"
+     default n
+    help
+        If this option is enabled, PSRAM can be used.
+
+config CACHE
+    bool "CACHE"
+    depends on (XIP || PSRAM) && !BOOTLOADER
+    default y
+    help
+        If this option is enabled, CACHE can be used.
+
+# Cache and size select
+choice
+	prompt "Cache Size Select"
+	depends on CACHE
+	default CACHE_SIZE_32K
+	help
+	  Select Cache.
+
+config CACHE_SIZE_8K
+	bool "8k"
+	help
+	  Use cache size 8K
+config CACHE_SIZE_16K
+	bool "16k"
+	help
+	  Use cache size 16K
+config CACHE_SIZE_32K
+	bool "32k"
+	help
+	  Use cache size 32K
+endchoice
+
+# OTA
+config OTA
+    bool "OTA"
+    default n
+    help
+        If this option is enabled, OTA used.
+
+# ota policy, choose ota mode
+choice
+	prompt "OTA Policy Select"
+	depends on OTA
+	default OTA_POLICY_PINGPONG
+	help
+	  Select OTA mode.
+
+config OTA_POLICY_PINGPONG
+	bool "ping pong mode"
+	help
+	  Select ping pang mode.
+config OTA_POLICY_IMAGE_COMPRESSION
+	bool "image compression mode"
+	help
+	  Select image compression mode.
+endchoice
+
+
+# xplayer
+config XPLAYER
+	bool "Xplayer support"
+	default n
+	help
+		xplayer.
+
+
+if CHIP_TYPE_XR872
+# JPEG
+config JPEG
+	bool "JPEG"
+	default n
+	help
+		JPEG.
+
+config JPEG_SHAR_SRAM_64K
+	bool "JPEG_SHAR_SRAM_64K"
+	depends on JPEG
+	default n
+	help
+		JPEG.
+endif
+
+
+# bin compression
+config BIN_COMPRESS
+	bool "Bin compression"
+	default n
+	help
+		bin compression for decompress bins(eg. wlan_fw.bin).
+
+
+# bench mark
+config BENCH_MARK
+	bool "Bench mark"
+	default n
+	help
+		bench mark.
+
+
+# MSP stack size set
+config MSP_STACK_SIZE
+	int "Interrupt stack size"
+	default 1024
+	help
+	  the stack size for config CPU MSP.
+
+
+# enable/disable bootloader, y to enable bootloader and disable some features
+config BOOTLOADER
+	bool "Build bootloader"
+	default n
+	help
+		set y to disable some features when build bootloader.
+
+endmenu

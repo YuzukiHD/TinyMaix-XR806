@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/ce"
+
+# CONFIG_XIP is not set

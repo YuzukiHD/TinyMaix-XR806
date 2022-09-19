@@ -1,0 +1,65 @@
+menu "PSRAM Devices"
+
+if PSRAM
+
+# Psram select
+choice
+	prompt "Psram Select"
+	depends on PSRAM
+	default PSRAM_CHIP_SQPI
+	help
+	  Select Psram.
+
+config PSRAM_CHIP_SQPI
+	bool "sqpi"
+	depends on CHIP_XR806
+	help
+		Select Psram sqpi
+if CHIP_TYPE_XR872 || CHIP_TYPE_XR808
+config PSRAM_CHIP_OPI32
+	bool "opi32"
+	help
+		Select Psram opi32
+config PSRAM_CHIP_OPI64
+	bool "opi64"
+	help
+		Select Psram opi64
+endif
+endchoice
+
+# Psram freq config
+choice
+	prompt "Psram freq config"
+	depends on PSRAM
+	default PSRAM_FREQ_96M
+	help
+	  Config psram frequency.
+
+config PSRAM_FREQ_96M
+	bool "96MHz"
+	help
+		Config psram frequency to 96MHz
+config PSRAM_FREQ_120M
+	bool "120MHz"
+	help
+		Config psram frequency to 120MHz
+endchoice
+
+# Psram heap writethrough config
+config PSRAM_HEAP_WRITETHROUGH
+	bool "Psram heap writethrough"
+	depends on PSRAM
+	default n
+	---help---
+		Psram heap writethrough or cacheable.
+
+# Psram check data before suspend and after resume
+config PSRAM_PM_DATA_CHECK
+	bool "Psram check data before suspend and after resume"
+	depends on PSRAM && PM
+	default n
+	help
+		Check psram data after resume compared with check data before suspend.
+
+endif
+endmenu

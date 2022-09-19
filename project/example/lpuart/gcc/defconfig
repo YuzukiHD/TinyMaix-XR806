@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/lpuart"
+#CONFIG_XIP is not set
+#CONFIG_WLAN is not set

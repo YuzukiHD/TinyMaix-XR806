@@ -1,0 +1,5 @@
+CONFIG_PROJECT="example/dhcpd"
+
+CONFIG_XIP=y
+
+CONFIG_WLAN=y

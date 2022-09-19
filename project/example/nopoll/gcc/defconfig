@@ -1,0 +1,5 @@
+CONFIG_PROJECT="example/nopoll"
+
+CONFIG_XIP=y
+
+CONFIG_WLAN=y

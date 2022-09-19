@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: GPL-2.0-only
+/qconf-moc.cc
+*conf-cfg
+*.o
+
+#
+# configuration programs
+#
+conf
+mconf
+nconf
+qconf
+gconf

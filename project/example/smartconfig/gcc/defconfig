@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/smartconfig"
+CONFIG_XIP=y
+CONFIG_WLAN=y

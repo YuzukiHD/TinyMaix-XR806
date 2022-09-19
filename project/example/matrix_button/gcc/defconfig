@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/matrix_button"
+#CONFIG_XIP is not set
+#CONFIG_WLAN is not set

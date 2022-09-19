@@ -1,0 +1,3 @@
+CONFIG_PROJECT="example/wlan_csfc"
+CONFIG_XIP=y
+CONFIG_WLAN=y

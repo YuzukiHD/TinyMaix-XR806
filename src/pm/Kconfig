@@ -1,0 +1,166 @@
+#
+# Power management configuration
+#
+
+if PM
+# wakelock support
+config PM_WAKELOCKS
+	bool "Wake lock"
+	default y
+	---help---
+		 Enable wakelocks. When user request a sleep state the sleep
+		 request will be delayed until no wake locks are held.
+
+
+# Num of try again when suspend faild
+config PM_TRY_NUM_WHEN_FAIL
+	int "Num of try again when suspend faild"
+	range 0 5
+	default 0
+	---help---
+		 0 is not try again when suspend faild.
+
+
+# standby retention sram config
+menuconfig STANDBY_RET_SRAM
+    bool "retention sram config during standby"
+    default y
+    help
+        Sram retention config when standby.
+
+if STANDBY_RET_SRAM
+config STANDBY_RET_SRAM_ALL
+	bool "ALL(0x200000~0x253FFF)"
+	default y
+	help
+		ALL retained when standby.
+config STANDBY_RET_SRAM0L_16K
+	bool "SRAM0L_16K(0x200000~0x203FFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM0L retained when standby.
+config STANDBY_RET_SRAM0H_16K
+	bool "SRAM0H_16K(0x204000~0x207FFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM0H_16K retained when standby.
+config STANDBY_RET_SRAM1_32K
+	bool "SRAM1_32K(0x208000~0x20FFFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM1_32K retained when standby.
+config STANDBY_RET_SRAM2_3_4_96K
+	bool "SRAM2_3_4_96K(0x210000~0x227FFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM2_3_4_96K sram retained when standby.
+config STANDBY_RET_SRAM5_6_7_96K
+	bool "SRAM5_6_7_96K(0x228000~0x23FFFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM5_6_7_96K sram retained when standby.
+config STANDBY_RET_SRAM8_32K
+	bool "SRAM8_32K(0x240000~0x247FFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM8_32K sram retained when standby.
+config STANDBY_RET_SSRAM9_10L_48K
+	bool "SRAM9_10L_48K(0x248000~0x253FFF)"
+	depends on !STANDBY_RET_SRAM_ALL
+	default n
+	help
+		SRAM9_10L_48K sram retained when standby.
+endif
+
+# hibernation retention sram config
+menuconfig HIBERNATION_RET_SRAM
+    bool "retention sram config during hibernation"
+    default n
+    help
+        Sram retention config when hibernation.
+
+if  HIBERNATION_RET_SRAM
+config  HIBERNATION_RET_SRAM_ALL
+	bool "ALL(0x200000~0x253FFF)"
+	default n
+	help
+		ALL retained when hibernation.
+config  HIBERNATION_RET_SRAM0L_16K
+	bool "SRAM0L_16K(0x200000~0x203FFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM0L retained when hibernation.
+config  HIBERNATION_RET_SRAM0H_16K
+	bool "SRAM0H_16K(0x204000~0x207FFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM0H_16K retained when hibernation.
+config  HIBERNATION_RET_SRAM1_32K
+	bool "SRAM1_32K(0x208000~0x20FFFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM1_32K retained when hibernation.
+config  HIBERNATION_RET_SRAM2_3_4_96K
+	bool "SRAM2_3_4_96K(0x210000~0x227FFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM2_3_4_96K sram retained when hibernation.
+config  HIBERNATION_RET_SRAM5_6_7_96K
+	bool "SRAM5_6_7_96K(0x228000~0x23FFFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM5_6_7_96K sram retained when hibernation.
+config  HIBERNATION_RET_SRAM8_32K
+	bool "SRAM8_32K(0x240000~0x247FFF)"
+	depends on !HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM8_32K sram retained when hibernation.
+config  HIBERNATION_RET_SSRAM9_10L_48K
+	bool "SRAM9_10L_48K(0x248000~0x253FFF)"
+	depends on ! HIBERNATION_RET_SRAM_ALL
+	default n
+	help
+		SRAM9_10L_48K sram retained when hibernation.
+endif
+
+
+# BLE connection wakeup pin
+config WAKEUP_PIN
+	bool "BLE connection wakeup pin"
+	depends on BLE
+	default n
+	---help---
+		BLE connection wakeup pin.
+
+# BLE auto enter low power
+config BLE_LOW_PWR_MODE
+	bool "BLE auto enter low power"
+	depends on BLE
+	default n
+	---help---
+		BLE auto enter low power.
+
+
+# PM debug level, maybe "Not select the debug verbosity level to be compiled into the PM code."
+config PM_DEBUG_LEVEL
+	int "PM debug level"
+	default 4
+	range 0 6
+	help
+	  By default, debug messages are disabled at compiling.
+	  If set at zero, this will compile out with no debug code.
+	  It is recommended that it is left at 4.
+
+endif

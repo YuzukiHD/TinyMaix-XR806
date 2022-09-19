@@ -53,4 +53,5 @@ tools/config/conf
 !/lib/libzbar.a
 !/lib/libwatchpoint.a
 
+tools/gcc-*
 gcc.mk

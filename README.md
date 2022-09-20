@@ -1,14 +1,11 @@
-# TinyMaix XR806
-
-XR806 SDK supports XR806 series wireless MCUs. With Sipeed TinyMaix TinyML Support
+<h1 align="center">TinyMaix XR806</h1>
+<p align="center">Port TinyMaix to XradioTech XR806 chip with Arm-Star ARMv8-M Core, 288KB SRAM, 160KB Code ROM. SIP 16Mbit Flash</p>
 
 | config | mnist (SRAM) | cifar | vww96 (Flash XIP) 32K Cache | mbnet128 (Flash XIP) 32K Cache | mbnet128 (Flash XIP) no Cache |
 | ------ | ------------ | ----- | --------------------------- | ------------------------------ | ----------------------------- |
 | O0 CPU | 2            | 134   | 459                         | 844                            | 42530                         |
 | O1 CPU | 1            | 104   | 453                         | 712                            | 35576                         |
 
-<h1 align="center">TinyMaix XR806</h1>
-<p align="center">Port TinyMaix to XradioTech XR806 chip with Arm-Star ARMv8-M Core, 288KB SRAM, 160KB Code ROM. SIP 16Mbit Flash</p>
 
 # Install
 

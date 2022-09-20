@@ -250,6 +250,8 @@ SECTIONS
         *project/common/apps/cedarx/sound_ctrl/soundControl_rtos.o (.text .text.* .rodata .rodata.*)
         *project/common/apps/cedarx/sound_ctrl/soundStreamControl.o (.text .text.* .rodata .rodata.*)
         *command.o (.text .text.* .rodata .rodata.*)
+        *label.o (.text .text.* .rodata .rodata.*)
+        *tinymaix_loader.o (.text .text.* .rodata .rodata.*)
 
         *(.xip_text* .xip_rodata*)
 

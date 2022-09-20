@@ -1,0 +1,3 @@
+CONFIG_PROJECT="demo/tinymaix_mbnet"
+CONFIG_TINYMAIX=y
+CONFIG_XIP=y

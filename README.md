@@ -50,13 +50,13 @@ Do not use `sudo`
 
 # Build Example Project
 
-## UART Example
+## TinyMaix mnist example
 
 Can be compiled separately or one command
 
 ### Separately
 ```shell
-cd project/example/uart/gcc
+cd project/demo/tinymaix_mnist/gcc
 make lib
 make 
 make image
@@ -64,6 +64,6 @@ make image
 
 ### One command
 ```shell
-cd project/example/uart/gcc
+cd project/demo/tinymaix_mnist/gcc
 make build
 ```

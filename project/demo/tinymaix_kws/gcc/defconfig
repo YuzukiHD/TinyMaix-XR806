@@ -1,0 +1,3 @@
+CONFIG_PROJECT="demo/tinymaix_kws"
+CONFIG_TINYMAIX=y
+CONFIG_XIP=y

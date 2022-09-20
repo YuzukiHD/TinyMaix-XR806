@@ -224,7 +224,7 @@ endchoice
 choice
 	prompt "TinyMaix OPT_LEVEL"
 	depends on TINYMAIX
-	default TINYMAIX_TM_ARCH_CPU
+	default TINYMAIX_TM_TM_OPT0
 	help
 	  Select TinyMaix TM_OPT, Support TM_OPT0, TM_TM_OPT1
 

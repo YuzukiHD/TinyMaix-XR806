@@ -5,7 +5,7 @@
 # ----------------------------------------------------------------------------
 # cross compiler
 # ----------------------------------------------------------------------------
-CC_DIR := /home/yuzuki/WorkSpace/xr806_sdk/tools/gcc-arm-none-eabi-8-2019-q3-update/bin
+CC_DIR := /home/yuzuki/WorkSpace/xr806_sdk/tools/gcc-arm-none-eabi-10.3-2021.07/bin
 CC_PREFIX := $(CC_DIR)/arm-none-eabi-
 
 AS      := $(CC_PREFIX)as

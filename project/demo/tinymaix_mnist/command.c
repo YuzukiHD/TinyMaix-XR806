@@ -27,25 +27,25 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "common/cmd/cmd_util.h"
 #include "common/cmd/cmd.h"
+#include "common/cmd/cmd_util.h"
 /*
  * main commands
  */
-static enum cmd_status cmd_main_help_exec(char *cmd);
+static enum cmd_status cmd_main_help_exec(char* cmd);
 
 static const struct cmd_data g_main_cmds[] = {
-	{ "pm",      cmd_pm_exec, CMD_DESC("power management command") },
-	{ "efpg",    cmd_efpg_exec, CMD_DESC("efpg command") },
-	{ "help",    cmd_main_help_exec, CMD_DESC(CMD_HELP_DESC) },
+    { "pm", cmd_pm_exec, CMD_DESC("power management command") },
+    { "efpg", cmd_efpg_exec, CMD_DESC("efpg command") },
+    { "help", cmd_main_help_exec, CMD_DESC(CMD_HELP_DESC) },
 };
 
-static enum cmd_status cmd_main_help_exec(char *cmd)
+static enum cmd_status cmd_main_help_exec(char* cmd)
 {
-	return cmd_help_exec(g_main_cmds, cmd_nitems(g_main_cmds), 8);
+    return cmd_help_exec(g_main_cmds, cmd_nitems(g_main_cmds), 8);
 }
 
-void main_cmd_exec(char *cmd)
+void main_cmd_exec(char* cmd)
 {
-	cmd_main_exec(cmd, g_main_cmds, cmd_nitems(g_main_cmds));
+    cmd_main_exec(cmd, g_main_cmds, cmd_nitems(g_main_cmds));
 }

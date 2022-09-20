@@ -1,2 +1,3 @@
 CONFIG_PROJECT="demo/tinymaix_mnist"
+CONFIG_TINYMAIX=y
 CONFIG_XIP=y

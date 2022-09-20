@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-void main_cmd_exec(char *cmd);
+void main_cmd_exec(char* cmd);
 
 #ifdef __cplusplus
 }

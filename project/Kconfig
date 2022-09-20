@@ -178,11 +178,65 @@ config BOOTLOADER
 	help
 		set y to disable some features when build bootloader.
 
-# Sipeed TinyMaix 
+# Sipeed lib TinyMaix 
 config TINYMAIX
-	bool "library tinymaix"
+	bool "TinyMaix is a tiny inference library for microcontrollers (TinyML)."
 	default n
 	help
 		set y to build library tinymaix.
+
+choice
+	prompt "TinyMaix TM_MDL_TYPE"
+	depends on TINYMAIX
+	default TINYMAIX_TM_MDL_INT8
+	help
+	  Select TinyMaix TM_MDL_TYPE, Support TM_MDL_INT8, TM_MDL_FP32
+
+config TINYMAIX_TM_MDL_INT8
+	bool "Using TM_MDL_INT8"
+	help
+	  Select TM_MDL_INT8.
+
+config TINYMAIX_TM_MDL_FP32
+	bool "Using TM_MDL_FP32"
+	help
+	  Select TM_MDL_FP32.
+endchoice
+
+choice
+	prompt "TinyMaix ARCH"
+	depends on TINYMAIX
+	default TINYMAIX_TM_ARCH_CPU
+	help
+	  Select TinyMaix instruction set acceleration, Support ARCH_CPU, ARCH_ARM_SIMD
+
+config TINYMAIX_TM_ARCH_CPU
+	bool "Pure cpu compute"
+	help
+	  Pure cpu compute.
+
+config TINYMAIX_TM_ARCH_ARM_SIMD
+	bool "Using ARM SIMD"
+	help
+	  Using ARM SIMD.
+endchoice
+
+choice
+	prompt "TinyMaix OPT_LEVEL"
+	depends on TINYMAIX
+	default TINYMAIX_TM_ARCH_CPU
+	help
+	  Select TinyMaix TM_OPT, Support TM_OPT0, TM_TM_OPT1
+
+config TINYMAIX_TM_TM_OPT0
+	bool "TM_OPT0, least code and buf"
+	help
+		least code and buf.
+
+config TINYMAIX_TM_TM_OPT1
+	bool "TM_OPT1, opt for speed, need more code and buf"
+	help
+		opt for speed, need more code and buf.
+endchoice
 
 endmenu
